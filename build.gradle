@@ -25,10 +25,18 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//추가
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.mariadb.jdbc:mariadb-java-client:3.1.4'
+    implementation group: 'org.jdom', name: 'jdom', version: '2.0.2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation group: 'com.h2database', name: 'h2', version: '2.1.214'
+    compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
 }
 
 tasks.named('test') {
