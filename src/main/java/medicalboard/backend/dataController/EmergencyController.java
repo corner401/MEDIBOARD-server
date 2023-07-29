@@ -1,4 +1,4 @@
-package medicalboard.backend.rest;
+package medicalboard.backend.dataController;
 
 import medicalboard.backend.model.Emergency;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,4 +1,4 @@
-package medicalboard.backend.rest;
+package medicalboard.backend.dataController;
 import medicalboard.backend.model.medicalNews;
 import medicalboard.backend.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +73,7 @@ public class medicalNewsController {
                     for (Element paragraphElement : paragraphs) {
                         articleContents.append(paragraphElement.text());
                     }
-                    
+
                     medicalNews article = new medicalNews();
                     article.setTitle(title);
                     article.setUrl(articleUrl);
