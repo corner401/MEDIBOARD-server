@@ -1,6 +1,8 @@
 package medicalboard.backend.rest;
 
 import medicalboard.backend.model.Emergency;
+import medicalboard.backend.model.HLocation;
+import medicalboard.backend.repository.HLocationRepository;
 import org.springframework.web.bind.annotation.RestController;
 import medicalboard.backend.repository.EmergencyRepository;
 import org.jdom2.Document;
@@ -13,28 +15,34 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
+
+
 @RestController
-public class HomeController {
+public class EmergencyController {
 
     @Autowired
     private EmergencyRepository emergencyRepository;
 
+
     @Value("${api.serviceKey}")
     private String serviceKey;
 
-    @RequestMapping("/api")
-    public String load_save(Model model) throws Exception {
+
+
+    @RequestMapping("/emergency")
+    public String emergency_save(Model model) throws Exception {
 
 
         StringBuffer sb = new StringBuffer("https://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire?");
         sb.append("serviceKey=");
         sb.append(serviceKey);
-        sb.append("&pageNo=1");
-        sb.append("&numOfRows=1000");
+        sb.append("&pageNo=1&numOfRows=1000");
 
         URL url = new URL(sb.toString());
 
@@ -66,11 +74,11 @@ public class HomeController {
             Integer hvicc = Integer.parseInt(item.getChildText("hvicc") == null ? "0" : item.getChildText("hvicc"));
             Integer hvgc = Integer.parseInt(item.getChildText("hvgc") == null ? "0" : item.getChildText("hvgc")); //내과중환자실 Long
             String hvctayn = item.getChildText("hvctayn") == null ? "0" : item.getChildText("hvctayn"); //내과중환자실 Long
-            String hvmriayn = item.getChildText("hvmriayn") == null ? "N1" : item.getChildText("hvmriayn");
-            String hvangioayn = item.getChildText("hvangioayn") == null ? "N1" : item.getChildText("hvangioayn");
-            String hvventiayn = item.getChildText("hvventiayn") == null ? "N1" : item.getChildText("hvventiayn");
-            String hvincuayn = item.getChildText("hvincuayn") == null ? "N1" : item.getChildText("hvincuayn");
-            String hvamyn = item.getChildText("hvamyn") == null ? "N1" : item.getChildText("hvamyn");
+            String hvmriayn = item.getChildText("hvmriayn") == null ? "N" : item.getChildText("hvmriayn");
+            String hvangioayn = item.getChildText("hvangioayn") == null ? "N" : item.getChildText("hvangioayn");
+            String hvventiayn = item.getChildText("hvventiayn") == null ? "N" : item.getChildText("hvventiayn");
+            String hvincuayn = item.getChildText("hvincuayn") == null ? "N" : item.getChildText("hvincuayn");
+            String hvamyn = item.getChildText("hvamyn") == null ? "N" : item.getChildText("hvamyn");
 
             Integer hv2 = Integer.parseInt(item.getChildText("hv2") == null ? "0" : item.getChildText("hv2")); //내과중환자실 Long
             Integer hv3 = Integer.parseInt(item.getChildText("hv3") == null ? "0" : item.getChildText("hv3"));
@@ -103,16 +111,18 @@ public class HomeController {
             Integer hv37 = Integer.parseInt(item.getChildText("hv37") == null ? "0" : item.getChildText("hv37"));
             Integer hv38 = Integer.parseInt(item.getChildText("hv38") == null ? "0" : item.getChildText("hv38"));
             Integer hv40 = Integer.parseInt(item.getChildText("hv40") == null ? "0" : item.getChildText("hv40"));
-            String dutytell3 = item.getChildText("dutytell3") == null ? "N1" : item.getChildText("dutytell3");
+            String dutytel3 = item.getChildText("dutytel3") == null ? "N" : item.getChildText("dutytel3");
 
 
             Emergency em = new Emergency(hpid, hvidate, dutyname, hvec, hvoc, hvcc, hvncc, hvccc, hvicc, hvgc, hvctayn, hvmriayn, hvangioayn, hvventiayn, hvincuayn
                     , hvamyn, hv2, hv3, hv4, hv5, hv6, hv8, hv9, hv10, hv11, hv13, hv14, hv15, hv16, hv17, hv18, hv19, hv21, hv22
-                    , hv23, hv24, hv25, hv26, hv29, hv30, hv31, hv32, hv33, hv36, hv37, hv38, hv40, dutytell3);
+                    , hv23, hv24, hv25, hv26, hv29, hv30, hv31, hv32, hv33, hv36, hv37, hv38, hv40, dutytel3);
             System.out.println(em);
             emergencyRepository.save(em);
         }
 
         return "index";
     }
+
+
 }
