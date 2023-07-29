@@ -1,8 +1,6 @@
 package medicalboard.backend.rest;
 
 import medicalboard.backend.model.Emergency;
-import medicalboard.backend.model.HLocation;
-import medicalboard.backend.repository.HLocationRepository;
 import org.springframework.web.bind.annotation.RestController;
 import medicalboard.backend.repository.EmergencyRepository;
 import org.jdom2.Document;
@@ -15,8 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;

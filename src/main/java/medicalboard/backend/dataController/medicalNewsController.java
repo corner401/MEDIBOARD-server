@@ -67,18 +67,13 @@ public class medicalNewsController {
 
                     //본문 ArticleContent -> medicalNews
                     Elements paragraphs = articlePage.select("div.arti > p");
-
-
-
                     System.out.println("paragraph  "+ id +"번째 :"+ paragraphs.getClass()); // 19번째 ~ 27번째 <p> 태그가 없음
-
+                    //본문 내용 articleContents에 모으기
                     StringBuilder articleContents = new StringBuilder();
                     for (Element paragraphElement : paragraphs) {
                         articleContents.append(paragraphElement.text());
                     }
-
-
-
+                    
                     medicalNews article = new medicalNews();
                     article.setTitle(title);
                     article.setUrl(articleUrl);
