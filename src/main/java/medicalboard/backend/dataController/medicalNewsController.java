@@ -66,13 +66,27 @@ public class medicalNewsController {
 
 
                     //본문 ArticleContent -> medicalNews
-                    Elements paragraphs = articlePage.select("div.arti > p");
-                    System.out.println("paragraph  "+ id +"번째 :"+ paragraphs.getClass()); // 19번째 ~ 27번째 <p> 태그가 없음
-                    //본문 내용 articleContents에 모으기
+                    Element parentElement = articlePage.selectFirst("div.arti");
+                    Elements childElements = parentElement.children();
+
                     StringBuilder articleContents = new StringBuilder();
-                    for (Element paragraphElement : paragraphs) {
-                        articleContents.append(paragraphElement.text());
+
+                    // 자식 태그들을 순회하며 처리
+                    for (Element childElement : childElements) {
+                        // 태그 이름 확인
+                        String tagName = childElement.tagName();
+
+                        // <p> 태그인지 확인
+                        if ("p".equals(tagName)) {
+                            // <p> 태그일 경우 원하는 작업 수행
+                            articleContents.append(childElement.text().trim());
+                        }
+                        // <div> 태그인지 확인
+                        if("div".equals(tagName)){
+                            articleContents.append(childElement.text().trim());
+                        }
                     }
+
 
                     medicalNews article = new medicalNews();
                     article.setTitle(title);
