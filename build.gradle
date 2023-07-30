@@ -37,7 +37,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation group: 'com.h2database', name: 'h2', version: '2.1.214'
     compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
-	implementation group: 'org.springframework.security', name: 'spring-security-crypto', version: '5.7.6'  /* spring-security-crypto */
 }
 
 tasks.named('test') {
