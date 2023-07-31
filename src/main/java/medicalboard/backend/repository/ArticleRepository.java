@@ -1,7 +1,7 @@
 package medicalboard.backend.repository;
 
-import medicalboard.backend.model.medicalNews;
+import medicalboard.backend.model.Article;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ArticleRepository extends JpaRepository<medicalNews, Integer> {
+public interface ArticleRepository extends JpaRepository<Article, Integer> {
 }

@@ -1,5 +1,5 @@
 package medicalboard.backend.dataController;
-import medicalboard.backend.model.medicalNews;
+import medicalboard.backend.model.Article;
 import medicalboard.backend.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,7 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,14 +18,14 @@ import org.jsoup.nodes.Element;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class medicalNewsController {
+public class ArticleController {
 
     @Autowired
     private ArticleRepository articleRepository;
 
     @GetMapping("/scrape") //http://localhost:8081/scrape?searchWord=의약
     public String scrapeData(@RequestParam("searchWord") String searchWord, Model model) throws IOException {
-        List<medicalNews> articles = new ArrayList<>();
+        List<Article> articles = new ArrayList<>();
         int result=0;
         int id = 0;
         try {
@@ -62,13 +64,21 @@ public class medicalNewsController {
                     // 기사 상세페이지
                     Document articlePage = Jsoup.connect(articleUrl).get();
                     Elements dateElements = articlePage.select("div.info > span");
-                    String createdDate = dateElements.get(0).text();
+                    //날짜
+                    String date = dateElements.get(0).text()+":00";
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+                    Date createdDate = formatter.parse(date);
 
 
-                    //본문 ArticleContent -> medicalNews
+                    //<div>
                     Element parentElement = articlePage.selectFirst("div.arti");
+                    //자식태그 <p> or <div>
                     Elements childElements = parentElement.children();
-
+                    //기자이름 제거
+                    childElements.remove(childElements.size()-1);
+                    //기자이름
+                    String writer = childElements.get(childElements.size()-1).text().trim().substring(0,3);
+                    //본문 내용 저장소
                     StringBuilder articleContents = new StringBuilder();
 
                     // 자식 태그들을 순회하며 처리
@@ -78,7 +88,6 @@ public class medicalNewsController {
 
                         // <p> 태그인지 확인
                         if ("p".equals(tagName)) {
-                            // <p> 태그일 경우 원하는 작업 수행
                             articleContents.append(childElement.text().trim());
                         }
                         // <div> 태그인지 확인
@@ -88,12 +97,13 @@ public class medicalNewsController {
                     }
 
 
-                    medicalNews article = new medicalNews();
+                    Article article = new Article();
                     article.setTitle(title);
-                    article.setUrl(articleUrl);
-                    article.setCreatedDate(createdDate);
-                    article.setContentList(articleContents.toString());
-                    System.out.println("content" + articleContents);
+                    article.setLink(articleUrl);
+                    article.setCreate_date(createdDate);
+                    article.setUpdate_date(createdDate);
+                    article.setContent(articleContents.toString());
+                    article.setWriter(writer);
                     article.setHashtag(searchWord);
 
                     articleRepository.saveAndFlush(article);
