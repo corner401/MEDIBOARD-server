@@ -1,7 +1,7 @@
 package medicalboard.backend.rest;
 
 import medicalboard.backend.DTO.UserDTO;
-import medicalboard.backend.Mapper.UserMapper;
+import medicalboard.backend.mapper.UserMapper;
 import medicalboard.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
