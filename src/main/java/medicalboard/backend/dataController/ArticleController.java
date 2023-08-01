@@ -16,8 +16,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.jsoup.nodes.Element;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class ArticleController {
 
     @Autowired
@@ -128,4 +129,17 @@ public class ArticleController {
         return "article-list"; // Thymeleaf template name for rendering the article list
     }
 
+    /*
+    뉴스기사 검색
+     */
+    @GetMapping("/api/news/list")
+    public List<Article> getArticles(@RequestParam(name = "keyword", required = false) String keyword){
+
+        if(keyword == null){
+            return articleRepository.findAll();
+        }
+        else{
+            return articleRepository.findByKeyword(keyword);
+        }
+    }
 }

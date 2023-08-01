@@ -70,7 +70,7 @@ public class StatisticsController {
     /*
     데이터 리스트 출력
      */
-    @GetMapping("/api/stat")
+    @GetMapping("/api/stat/list")
     public List<Statistics> getAllStatistics(@RequestParam(name = "keyword", required = false) String keyword,
                                              @RequestParam(name = "hashtag", required = false) String hashtag) {
 
@@ -93,6 +93,8 @@ public class StatisticsController {
                 }
             }
             return stat;
+        } else if(hashtag == null){
+            return statisticsRepository.findByKeyword(keyword);
         }
         return null;
     }
