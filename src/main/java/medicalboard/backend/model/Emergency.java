@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 
 @NoArgsConstructor //파라미터 없는 생성자
 @AllArgsConstructor //모든 플드를 파라미터로 가지는 생성자
+@Getter
 @Entity
 @Data
 public class Emergency {

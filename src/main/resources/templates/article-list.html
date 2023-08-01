@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Your head content here -->
+</head>
+<body>
+<h1>Medical News Articles</h1>
+
+<ul>
+    <li th:each="article : ${articles}">
+        <h3 th:text="${article.title}"></h3>
+        <p th:text="${article.hashtag}"></p>
+        <p th:text="${article.writer}"></p>
+        <p th:text="${article.createdDate}"></p>
+        <p th:text="${article.contentList}"></p>
+        <hr/>
+    </li>
+</ul>
+</body>
+</html>
