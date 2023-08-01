@@ -2,7 +2,7 @@ package medicalboard.backend.service;
 
 import jakarta.transaction.Transactional;
 import medicalboard.backend.DTO.UserDTO;
-import medicalboard.backend.Mapper.UserMapper;
+import medicalboard.backend.mapper.UserMapper;
 import medicalboard.backend.entity.User;
 import medicalboard.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
