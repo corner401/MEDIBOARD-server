@@ -2,6 +2,17 @@ package medicalboard.backend.repository;
 
 import medicalboard.backend.model.Statistics;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
+import java.util.Optional;
+
 
 public interface StatisticsRepository extends JpaRepository<Statistics, Integer> {
+
+//    Statistics findByKeyword(String);
+    List<Statistics> findByHashtag(String hashtag);
+    @Query("SELECT s.title AS title, s.hashtag AS hashtag FROM Statistics s")
+    List<StatisticsMapping> findHashtag();
+    Statistics findByTitle(String title);
 }

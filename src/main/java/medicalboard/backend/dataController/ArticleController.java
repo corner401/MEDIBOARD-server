@@ -23,6 +23,9 @@ public class ArticleController {
     @Autowired
     private ArticleRepository articleRepository;
 
+    /*
+    뉴스 기사 크롤링
+     */
     @GetMapping("/scrape") //http://localhost:8081/scrape?searchWord=의약
     public String scrapeData(@RequestParam("searchWord") String searchWord, Model model) throws IOException {
         List<Article> articles = new ArrayList<>();
@@ -37,10 +40,13 @@ public class ArticleController {
             //첫번째 페이지에 나오는 마지막 페이지
             Elements total = doc.select("li.page-item");
             //마지막 페이지 url로 연결
-            String lastUrl = "https://www.dailymedi.com/" + total.get(total.size()-1).select("a.page-link").attr("href");
-            doc = Jsoup.connect(lastUrl)
-                    .userAgent("Mozilla/5.0")
-                    .get();
+            if(total.size() != 0){
+                String lastUrl = "https://www.dailymedi.com/" + total.get(total.size()-1).select("a.page-link").attr("href");
+                doc = Jsoup.connect(lastUrl)
+                        .userAgent("Mozilla/5.0")
+                        .get();
+            }
+
             //마지막 페이지 수
             String lastpage = doc.select("span.page-link").text();
 
@@ -63,8 +69,8 @@ public class ArticleController {
 
                     // 기사 상세페이지
                     Document articlePage = Jsoup.connect(articleUrl).get();
-                    Elements dateElements = articlePage.select("div.info > span");
                     //날짜
+                    Elements dateElements = articlePage.select("div.info > span");
                     String date = dateElements.get(0).text()+":00";
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
                     Date createdDate = formatter.parse(date);
@@ -98,25 +104,28 @@ public class ArticleController {
 
 
                     Article article = new Article();
+
                     article.setTitle(title);
                     article.setLink(articleUrl);
                     article.setCreate_date(createdDate);
                     article.setUpdate_date(createdDate);
                     article.setContent(articleContents.toString());
                     article.setWriter(writer);
+                    if(searchWord.equals("요양"))
+                        searchWord = "요양기관";
                     article.setHashtag(searchWord);
 
-                    articleRepository.saveAndFlush(article);
+                    articleRepository.save(article);
 
-                    articles.add(article); // Add the scraped article to the list
-                    id++;
+//                    articles.add(article); // Add the scraped article to the list
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        model.addAttribute("articles", articles);
+//        model.addAttribute("articles", articles);
         return "article-list"; // Thymeleaf template name for rendering the article list
     }
+
 }
