@@ -112,6 +112,7 @@ public class ArticleController {
                     article.setUpdate_date(createdDate);
                     article.setContent(articleContents.toString());
                     article.setWriter(writer);
+                    article.setNewspaper("데일리 메디");
                     if(searchWord.equals("요양"))
                         searchWord = "요양기관";
                     article.setHashtag(searchWord);
