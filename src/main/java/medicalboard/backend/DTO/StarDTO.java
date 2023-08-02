@@ -12,9 +12,9 @@ public class StarDTO {
     @Nullable
     private Integer id;
     @Nullable
-    private Integer user_id;
+    private Integer userId;
     @Nullable
-    private Integer stat_id;
+    private Integer statId;
     @Nullable
     private String job;
 

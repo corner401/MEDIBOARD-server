@@ -2,6 +2,10 @@ package medicalboard.backend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import medicalboard.backend.model.Statistics;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
@@ -15,30 +19,28 @@ public class Dashboard extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
-    private Integer user_id;
-    @Column
-    private Integer dash_page;
+    @Column(name = "user_id")
+    private Integer userId;
+    @Column(name = "dash_page")
+    private Integer dashPage;
 
 
-    /*
-    @Column
-    private Integer stat_id1;
-    @Column
-    private Integer stat_id2;
-    @Column
-    private Integer stat_id3;
-    @Column
-    private Integer stat_id4;
-    @Column
-    private Integer stat_id5;
-    @Column
-    private Integer stat_id6;
-    @Column
-    private Integer stat_id7;
-    @Column
-    private Integer stat_id8;
-    @Column
-    private Integer stat_id9;
-     */
+
+    @Column(name = "stat_list", columnDefinition = "longtext")
+    private List<Statistics> statList  = new ArrayList<>();
+
+    public Dashboard(Integer userId, int dash_page) {
+        super();
+        this.userId = userId;
+        this.dashPage = dash_page;
+    }
+
+    public void addStat(Statistics stat) {
+        statList.add(stat);
+    }
+
+    public void removeStat(Statistics stat) {
+        statList.remove(stat);
+    }
+
 }

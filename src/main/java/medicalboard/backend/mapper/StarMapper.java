@@ -13,8 +13,8 @@ public class StarMapper {
 
         Star star = new Star(
                 starDTO.getId(),
-                starDTO.getUser_id(),
-                starDTO.getStat_id(),
+                starDTO.getUserId(),
+                starDTO.getStatId(),
                 starDTO.getJob()
         );
 
@@ -29,8 +29,8 @@ public class StarMapper {
 
         StarDTO starDTO = new StarDTO(
                 star.getId(),
-                star.getUser_id(),
-                star.getStat_id(),
+                star.getUserId(),
+                star.getStatId(),
                 star.getJob()
         );
 

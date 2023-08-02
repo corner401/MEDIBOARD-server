@@ -15,10 +15,10 @@ public class Star extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
-    private Integer user_id;
-    @Column
-    private Integer stat_id;
+    @Column(name = "user_id")
+    private Integer userId;
+    @Column(name = "stat_id")
+    private Integer statId;
     @Column
     private String job;
 
