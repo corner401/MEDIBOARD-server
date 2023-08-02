@@ -29,6 +29,7 @@ public class Statistics {
     private String source;
     private String hashtag;
 
+
     public Statistics(Date create_date, Date update_date, String title, String table_name, String summary, String content, String source, String hashtag){
         this.create_date = create_date;
         this.update_date = update_date;

@@ -24,6 +24,7 @@ public class Article {
     private Date update_date;
     private String link;
     private String hashtag;
+    private String newspaper;
 
 
 }
