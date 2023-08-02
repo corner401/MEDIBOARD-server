@@ -1,9 +1,7 @@
-package medicalboard.backend.Mapper;
+package medicalboard.backend.mapper;
 
 import medicalboard.backend.DTO.UserDTO;
 import medicalboard.backend.entity.User;
-
-import java.util.Optional;
 
 public class UserMapper {
 

@@ -13,6 +13,8 @@ import java.util.Optional;
 
 public interface StatisticsRepository extends JpaRepository<Statistics, Integer> {
 
+    Statistics getById(Integer id);
+
 //    Statistics findByKeyword(String);
     List<Statistics> findByHashtag(String hashtag);
     @Query("SELECT s.title AS title, s.hashtag AS hashtag FROM Statistics s")
@@ -22,3 +24,4 @@ public interface StatisticsRepository extends JpaRepository<Statistics, Integer>
     List<Statistics> findByKeyword(@Param("keyword") String keyword);
     Optional<Statistics> findById(@NonNull Integer id);
 }
+
