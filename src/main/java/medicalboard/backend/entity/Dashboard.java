@@ -25,9 +25,9 @@ public class Dashboard extends BaseTimeEntity{
     private Integer dashPage;
 
 
-
+    @Convert(converter = StringListConverter.class)
     @Column(name = "stat_list", columnDefinition = "longtext")
-    private List<Statistics> statList  = new ArrayList<>();
+    private List<String> statList  = new ArrayList<>();
 
     public Dashboard(Integer userId, int dash_page) {
         super();
@@ -36,11 +36,11 @@ public class Dashboard extends BaseTimeEntity{
     }
 
     public void addStat(Statistics stat) {
-        statList.add(stat);
+        statList.add(stat.getId().toString());
     }
 
     public void removeStat(Statistics stat) {
-        statList.remove(stat);
+        statList.remove(stat.getId().toString());
     }
 
 }

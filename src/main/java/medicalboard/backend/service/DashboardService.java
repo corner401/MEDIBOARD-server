@@ -31,6 +31,7 @@ public class DashboardService {
         // 기존에 User가 만든 Dashboard가 존재하면 해당 대시보드에 추가
         if (dashboard != null) {
             dashboard.addStat(stat);  // (트랜잭션 종료 시점에) JPA가 엔터티의 변경을 감지하여 자동으로 업데이트 쿼리를 보낸다.
+            dashboardRepository.save(dashboard);  // 근데 변경감지 반영 안 돼서 save 추가함...
         } else {
             // 기존에 User가 만든 Dashboard가 존재하지 않으면
             // Dashboard를 새로 만들기
