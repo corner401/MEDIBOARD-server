@@ -51,12 +51,12 @@ public class StatisticsController {
 
         //MedicalSupplies
         Statistics statistics3 = new Statistics(format.parse("2023-02-14"), format.parse("2023-05-01"), "요양기관소재지별/병상규모별 의약품 사용 통계",
-                "MedicalSupplies", "기간별, 지역별, 병상 규모별 의약 수량, 사용금액", "기간명, 지역코드, 지역명, 병상규모별, 수량, 사용금액", source2, "지역,병상규모,의약");
+                "MedicalSupplies", "기간별, 지역별, 병상 규모별 의약 수량, 사용금액", "기간명, 지역코드, 지역명, 병상규모별, 수량, 사용금액", source2, "지역,병상규모,의약품");
         statisticsRepository.save(statistics3);
 
         //MedicalHospital
         Statistics statistics4 = new Statistics(format.parse("2023-02-14"), format.parse("2023-05-01"), "요양기관소재지별/요양기관종별 의약품 사용 통계",
-                "MedicalHospitalSupplies", "기간별, 지역별, 요양기관종별 의약 수량, 사용금액", "기간명, 지역코드, 지역명, 요양기관종별, 수량, 사용금액", source2, "지역,요양기관종,의약");
+                "MedicalHospitalSupplies", "기간별, 지역별, 요양기관종별 의약 수량, 사용금액", "기간명, 지역코드, 지역명, 요양기관종별, 수량, 사용금액", source2, "지역,요양기관종,의약품");
         statisticsRepository.save(statistics4);
 
         //Pharmacy
