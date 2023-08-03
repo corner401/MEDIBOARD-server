@@ -1,6 +1,8 @@
 package medicalboard.backend.service;
 
+import medicalboard.backend.DTO.DashboardDTO;
 import medicalboard.backend.DTO.StarDTO;
+import medicalboard.backend.DTO.UserDTO;
 import medicalboard.backend.entity.Dashboard;
 import medicalboard.backend.entity.User;
 import medicalboard.backend.model.Statistics;
@@ -8,6 +10,9 @@ import medicalboard.backend.repository.DashboardRepository;
 import medicalboard.backend.repository.StatisticsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -39,6 +44,20 @@ public class DashboardService {
             newDashboard.addStat(stat);
             dashboardRepository.save(newDashboard);
         }
+    }
+
+    public DashboardDTO getDashboard(UserDTO userDTO, Integer dashPage) {
+        Dashboard dashboard = dashboardRepository.findByUserIdAndDashPage(userDTO.getUserId(), dashPage);
+        if (dashboard==null) return null;
+
+        List<String> statIdList = dashboard.getStatList();
+        List<Statistics> statList = new ArrayList<Statistics>();
+        for (String statId : statIdList) {
+            statList.add(statisticsRepository.getById(Integer.parseInt(statId)));
+        }
+
+        DashboardDTO dashboardDTO = new DashboardDTO(userDTO.getUserId(), dashPage, statList);
+        return dashboardDTO;
     }
 
 }

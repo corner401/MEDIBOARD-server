@@ -10,4 +10,5 @@ public interface DashboardRepository extends JpaRepository<Dashboard, Integer> {
     Dashboard findByUserId(Integer userId);
     List<Dashboard> findAllByUserId(Integer userId);
 
+    Dashboard findByUserIdAndDashPage(Integer userId, Integer dashPage);
 }
