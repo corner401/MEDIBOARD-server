@@ -108,8 +108,8 @@ public class ArticleController {
 
                     article.setTitle(title);
                     article.setLink(articleUrl);
-                    article.setCreate_date(createdDate);
-                    article.setUpdate_date(createdDate);
+                    article.setCreateDate(createdDate);
+                    article.setUpdateDate(createdDate);
                     article.setContent(articleContents.toString());
                     article.setWriter(writer);
                     article.setNewspaper("데일리 메디");
