@@ -25,3 +25,4 @@ public class DashboardDTO {
         this.statList = statList;
     }
 }
+
