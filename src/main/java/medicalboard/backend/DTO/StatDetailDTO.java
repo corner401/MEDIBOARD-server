@@ -13,6 +13,5 @@ import java.util.Optional;
 public class StatDetailDTO {
 
     private Optional<Statistics> statistics;
-
     private List<Article> articleList;
 }

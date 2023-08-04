@@ -1,9 +1,6 @@
 package medicalboard.backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
@@ -22,9 +19,12 @@ public class Statistics {
 //    private String embededURL;
 //    private String Token;
 //    private String reportId;
+    @Column(name = "create_date")
     private Date createDate;
+    @Column(name = "update_date")
     private Date updateDate;
     private String title;
+    @Column(name = "table_name")
     private String tableName;
     private String summary;
     private String content;

@@ -20,7 +20,9 @@ public class Article {
     private String title;
     private String writer;
     private String content;
+    @Column(name = "create_date")
     private Date createDate;
+    @Column(name = "update_date")
     private Date updateDate;
     private String link;
     private String hashtag;
