@@ -19,22 +19,24 @@ public class Statistics {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-//    private String powerbiUrl;
-    private Date create_date;
-    private Date update_date;
+//    private String embededURL;
+//    private String Token;
+//    private String reportId;
+    private Date createDate;
+    private Date updateDate;
     private String title;
-    private String table_name;
+    private String tableName;
     private String summary;
     private String content;
     private String source;
     private String hashtag;
 
 
-    public Statistics(Date create_date, Date update_date, String title, String table_name, String summary, String content, String source, String hashtag){
-        this.create_date = create_date;
-        this.update_date = update_date;
+    public Statistics(Date createDate, Date updateDate, String title, String tableName, String summary, String content, String source, String hashtag){
+        this.createDate = createDate;
+        this.updateDate = updateDate;
         this.title = title;
-        this.table_name = table_name;
+        this.tableName = tableName;
         this.summary = summary;
         this.content = content;
         this.source = source;

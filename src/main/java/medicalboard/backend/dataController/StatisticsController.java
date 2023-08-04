@@ -21,7 +21,6 @@ public class StatisticsController {
 
     @Autowired
     StatisticsRepository statisticsRepository;
-
     /*
     데이터 내용 DB에 저장
      */
