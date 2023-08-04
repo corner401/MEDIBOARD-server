@@ -10,7 +10,7 @@ import org.thymeleaf.util.StringUtils;
 @AllArgsConstructor
 public class UserDTO {
     @Nullable
-    private Integer id;
+    private Integer userId;
     @Nullable
     private String email;
     @Nullable
@@ -21,7 +21,7 @@ public class UserDTO {
     private String job;
 
     public UserDTO(Integer userId) {
-        this.id = userId;
+        this.userId = userId;
     }
 
     public void encodingPassword (PasswordEncoder passwordEncoder) {

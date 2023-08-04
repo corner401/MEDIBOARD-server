@@ -1,9 +1,7 @@
-package medicalboard.backend.Mapper;
+package medicalboard.backend.mapper;
 
 import medicalboard.backend.DTO.UserDTO;
 import medicalboard.backend.entity.User;
-
-import java.util.Optional;
 
 public class UserMapper {
 
@@ -19,7 +17,7 @@ public class UserMapper {
 
     public static User dtoToEntity(UserDTO userDTO) {
         User user = new User();
-        user.setId(userDTO.getId());
+        user.setId(userDTO.getUserId());
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
         user.setDashboard(userDTO.getDashboard());

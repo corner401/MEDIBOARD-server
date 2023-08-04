@@ -86,8 +86,8 @@ public class StatisticsController {
                 for(String text : hashtags){ //모든 hashtag
                     if(text.equals(hashtag)){ //만약 선택한 hashtag와 일치한다면
                         //Title에 맞는 Statistics 가져오기
-                        Statistics getStatic = statisticsRepository.findByTitle(mapping.getTitle());
-                        stat.add(getStatic);
+                        Statistics getStatics = statisticsRepository.findByTitle(mapping.getTitle());
+                        stat.add(getStatics);
                     }
                 }
             }
