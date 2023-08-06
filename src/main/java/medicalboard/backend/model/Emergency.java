@@ -1,5 +1,6 @@
 package medicalboard.backend.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.*;
 import jakarta.persistence.Id;
@@ -15,6 +16,7 @@ public class Emergency {
     private String hpid; //기관코드
     //입력일시
     private String hvidate;
+    @Column(name = "duty_name")
     private String dutyName; //병원명
     //일반-int
     private Integer hvec;

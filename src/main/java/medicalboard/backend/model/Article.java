@@ -16,14 +16,17 @@ public class Article {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String title;
     private String writer;
     private String content;
-    private Date create_date;
-    private Date update_date;
+    @Column(name = "create_date")
+    private Date createDate;
+    @Column(name = "update_date")
+    private Date updateDate;
     private String link;
     private String hashtag;
+    private String newspaper;
 
 
 }

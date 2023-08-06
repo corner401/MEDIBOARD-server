@@ -1,4 +1,4 @@
-package medicalboard.backend.rest;
+package medicalboard.backend.controller;
 
 import medicalboard.backend.DTO.UserDTO;
 import medicalboard.backend.service.UserService;
@@ -14,13 +14,6 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
-
-
-    @PostMapping("/api/auth/test")
-    public ResponseEntity<Object> test(@RequestBody UserDTO user) {
-        return ResponseEntity.status(HttpStatus.OK).body(user);
-    }
-
 
     /*
      * 회원가입
