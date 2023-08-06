@@ -20,8 +20,8 @@ public interface StatisticsRepository extends JpaRepository<Statistics, Integer>
     @Query("SELECT s.title AS title, s.hashtag AS hashtag FROM Statistics s")
     List<StatisticsMapping> findHashtag();
     Statistics findByTitle(String title);
-    @Query("SELECT s FROM Statistics s WHERE s.table_name LIKE %:keyword% OR s.summary LIKE %:keyword% OR s.title LIKE %:keyword%")
-    List<Statistics> findByKeyword(@Param("keyword") String keyword);
+    @Query("SELECT s FROM Statistics s WHERE s.tableName LIKE %:keyword% OR s.summary LIKE %:keyword% OR s.title LIKE %:keyword%")
+    public List<Statistics> findByKeyword(@Param("keyword") String keyword);
     Optional<Statistics> findById(@NonNull Integer id);
 }
 
