@@ -10,7 +10,6 @@ public class StatisticsService {
 
     @Autowired
     StatisticsRepository statisticsRepository;
-
     public Statistics getStatisticsById(Integer statId) {
         return statisticsRepository.findById(statId).orElse(null);
     }

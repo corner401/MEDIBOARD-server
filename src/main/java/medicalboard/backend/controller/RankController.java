@@ -1,2 +1,37 @@
-package medicalboard.backend.controller;public class RankController {
+package medicalboard.backend.controller;
+
+import medicalboard.backend.entity.Rank;
+import medicalboard.backend.entity.Statistics;
+import medicalboard.backend.repository.RankRepository;
+import medicalboard.backend.service.RankService;
+import medicalboard.backend.service.StarService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+public class RankController {
+
+    @Autowired
+    RankService rankService;
+    @Autowired
+    RankRepository rankRepository;
+
+    /*
+    rank
+    */
+    @GetMapping("/stat/rank/{job}")
+    public List<Statistics> getTopThreeFavoriteStatsByJob(@PathVariable String job) {
+        List<Statistics> statList= rankService.getTop3FavoriteStatsByJob(job);
+
+        Rank rank = new Rank();
+        rank.setJob(job);
+        rank.setStat(statList);
+        rankRepository.save(rank);
+
+        return statList;
+    }
 }

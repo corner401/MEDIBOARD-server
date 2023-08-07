@@ -34,11 +34,5 @@ public class StarController {
 
     }
 
-    /*
-    rank
-     */
-    @GetMapping("/topThreeStats/{job}")
-    public List<Statistics> getTopThreeFavoriteStatsByJob(@PathVariable String job) {
-        return dashboardService.getTop3FavoriteStatsByJob(job);
-    }
+
 }

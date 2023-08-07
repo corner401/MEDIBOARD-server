@@ -1,6 +1,6 @@
-package medicalboard.backend.repository;
+package medicalboard.backend.mapper;
 
-public interface ArticleMapping {
+public interface ArticleMapper {
 
     Integer getId();
     String getHashtag();

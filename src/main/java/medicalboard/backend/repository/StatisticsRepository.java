@@ -24,5 +24,6 @@ public interface StatisticsRepository extends JpaRepository<Statistics, Integer>
 
     @Query("SELECT s.id AS id FROM Statistics s")
     Optional<Statistics> findById(Integer id);
+
 }
 
