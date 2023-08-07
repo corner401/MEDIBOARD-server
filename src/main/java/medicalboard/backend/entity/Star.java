@@ -22,4 +22,5 @@ public class Star extends BaseTimeEntity {
     @Column
     private String job;
 
+
 }

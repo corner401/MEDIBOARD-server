@@ -3,7 +3,7 @@ package medicalboard.backend.DTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import medicalboard.backend.model.Article;
-import medicalboard.backend.model.Statistics;
+import medicalboard.backend.entity.Statistics;
 
 import java.util.List;
 import java.util.Optional;

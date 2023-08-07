@@ -2,10 +2,9 @@ package medicalboard.backend.dataController;
 
 import medicalboard.backend.DTO.StatDetailDTO;
 import medicalboard.backend.model.Article;
-import medicalboard.backend.model.Statistics;
+import medicalboard.backend.entity.Statistics;
 import medicalboard.backend.repository.ArticleMapping;
 import medicalboard.backend.repository.ArticleRepository;
-import medicalboard.backend.repository.StatisticsMapping;
 import medicalboard.backend.repository.StatisticsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

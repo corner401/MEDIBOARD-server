@@ -2,7 +2,6 @@ package medicalboard.backend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import medicalboard.backend.model.Statistics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +22,14 @@ public class Dashboard extends BaseTimeEntity{
     private Integer userId;
     @Column(name = "dash_page")
     private Integer dashPage;
-
-
     @Convert(converter = StringListConverter.class)
     @Column(name = "stat_list", columnDefinition = "longtext")
     private List<String> statList  = new ArrayList<>();
+
+    //대시보드와 유저 다대일 관계
+    @ManyToOne
+    @JoinColumn(name = "user")
+    private User user;
 
     public Dashboard(Integer userId, int dash_page) {
         super();

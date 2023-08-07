@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
@@ -27,5 +29,8 @@ public class User extends BaseTimeEntity {
     @Column
     private String job;
 
+    //관계 추가
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Dashboard> dashboards = new ArrayList<>();
 }
 

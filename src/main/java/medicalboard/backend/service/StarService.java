@@ -3,7 +3,7 @@ package medicalboard.backend.service;
 import medicalboard.backend.DTO.StarDTO;
 import medicalboard.backend.entity.User;
 import medicalboard.backend.mapper.StarMapper;
-import medicalboard.backend.model.Statistics;
+import medicalboard.backend.entity.Statistics;
 import medicalboard.backend.repository.StarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

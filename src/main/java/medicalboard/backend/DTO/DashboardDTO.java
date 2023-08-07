@@ -1,11 +1,9 @@
 package medicalboard.backend.DTO;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import medicalboard.backend.model.Statistics;
+import medicalboard.backend.entity.Statistics;
 
 import java.util.List;
 
