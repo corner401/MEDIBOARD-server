@@ -1,5 +1,6 @@
 package medicalboard.backend.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -29,6 +30,5 @@ public class User extends BaseTimeEntity {
     private String dashboard;
     @Column
     private String job;
-
 }
 

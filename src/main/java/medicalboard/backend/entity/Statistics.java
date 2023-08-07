@@ -10,7 +10,6 @@ import java.util.Date;
 @Table(name = "statistics")
 @Setter
 @Getter
-@Data
 @Entity
 public class Statistics {
 
