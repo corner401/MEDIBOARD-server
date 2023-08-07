@@ -23,12 +23,17 @@ public class Statistics {
     private Date createDate;
     @Column(name = "update_date")
     private Date updateDate;
+    @Column
     private String title;
     @Column(name = "table_name")
     private String tableName;
+    @Column
     private String summary;
+    @Column
     private String content;
+    @Column
     private String source;
+    @Column
     private String hashtag;
 
 
