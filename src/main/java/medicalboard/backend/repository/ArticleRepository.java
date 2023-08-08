@@ -1,7 +1,8 @@
 package medicalboard.backend.repository;
 
 import lombok.NonNull;
-import medicalboard.backend.model.Article;
+import medicalboard.backend.mapper.ArticleMapper;
+import medicalboard.backend.datamodel.Article;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,6 +15,6 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
     List<Article> findByKeyword(@Param("keyword") String keyword);
 
     @Query("SELECT a.id AS id, a.hashtag AS hashtag FROM Article a")
-    List<ArticleMapping> findHashtag();
+    List<ArticleMapper> findHashtag();
     Optional<Article> findById(@NonNull Integer id);
 }

@@ -1,6 +1,6 @@
 package medicalboard.backend.dataController;
 
-import medicalboard.backend.model.Statistics;
+import medicalboard.backend.entity.Statistics;
 import medicalboard.backend.repository.StatisticsMapping;
 import medicalboard.backend.repository.StatisticsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class StatisticsController {

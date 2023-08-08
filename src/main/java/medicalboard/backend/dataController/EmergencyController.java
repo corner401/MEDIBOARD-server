@@ -1,6 +1,6 @@
 package medicalboard.backend.dataController;
 
-import medicalboard.backend.model.Emergency;
+import medicalboard.backend.datamodel.Emergency;
 import org.springframework.web.bind.annotation.RestController;
 import medicalboard.backend.repository.EmergencyRepository;
 import org.jdom2.Document;
