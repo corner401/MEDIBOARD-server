@@ -1,4 +1,4 @@
-package medicalboard.backend.model;
+package medicalboard.backend.datamodel;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

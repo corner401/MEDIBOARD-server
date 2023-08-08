@@ -4,15 +4,18 @@ import medicalboard.backend.DTO.DashboardDTO;
 import medicalboard.backend.DTO.StarDTO;
 import medicalboard.backend.DTO.UserDTO;
 import medicalboard.backend.entity.Dashboard;
+import medicalboard.backend.entity.Star;
 import medicalboard.backend.entity.User;
-import medicalboard.backend.model.Statistics;
+import medicalboard.backend.entity.Statistics;
 import medicalboard.backend.repository.DashboardRepository;
+import medicalboard.backend.repository.StarRepository;
 import medicalboard.backend.repository.StatisticsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -24,6 +27,9 @@ public class DashboardService {
     private StatisticsRepository statisticsRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private StarRepository starRepository;
+
 
     public void addStar(StarDTO starDTO) {
 
@@ -45,6 +51,19 @@ public class DashboardService {
             dashboardRepository.save(newDashboard);
         }
     }
+
+    /*
+    statistic -> dashboard 저장
+     */
+    public void addStatToDashboard(Integer dashboardId, Statistics stat){
+        Dashboard dashboard = dashboardRepository.findById(dashboardId).orElse(null);
+        if(dashboard != null){
+            dashboard.addStat(stat);
+            dashboardRepository.save(dashboard);
+        }
+    }
+
+
 
     public DashboardDTO getDashboard(UserDTO userDTO, Integer dashPage) {
         Dashboard dashboard = dashboardRepository.findByUserIdAndDashPage(userDTO.getUserId(), dashPage);

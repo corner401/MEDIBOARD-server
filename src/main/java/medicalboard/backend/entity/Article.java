@@ -1,4 +1,4 @@
-package medicalboard.backend.model;
+package medicalboard.backend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

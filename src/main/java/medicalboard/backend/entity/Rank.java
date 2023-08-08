@@ -1,26 +1,29 @@
 package medicalboard.backend.entity;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 
+
 @Entity
 @Builder
-@Table(name = "star")
+@Table(name = "`rank`")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Star extends BaseTimeEntity {
+public class Rank extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "user_id")
-    private Integer userId;
-    @Column(name = "stat_id")
-    private Integer statId;
     @Column
     private String job;
+    @Column(name = "stat_id_list")
+    private String statIdList;
 
-
+    public Rank(String job, String statIdList){
+        this.job = job;
+        this.statIdList = statIdList;
+    }
 }
