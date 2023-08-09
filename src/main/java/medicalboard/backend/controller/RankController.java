@@ -23,7 +23,7 @@ public class RankController {
     /*
     rank
     */
-    @GetMapping("/stat/rank/{job}")
+    @GetMapping("api/stat/rank/{job}")
     public List<Statistics> getTopThreeFavoriteStatsByJob(@PathVariable String job) {
         List<Statistics> statList= rankService.getTop3FavoriteStatsByJob(job);
 

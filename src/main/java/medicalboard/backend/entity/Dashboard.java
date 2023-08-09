@@ -22,6 +22,7 @@ public class Dashboard extends BaseTimeEntity{
     private Integer userId;
     @Column(name = "dash_page")
     private Integer dashPage;
+    //외래키
     @Convert(converter = StringListConverter.class)
     @Column(name = "stat_list", columnDefinition = "longtext")
     private List<String> statList  = new ArrayList<>();
