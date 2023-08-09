@@ -75,7 +75,6 @@ public class ArticleController {
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
                     Date createdDate = formatter.parse(date);
 
-
                     //<div>
                     Element parentElement = articlePage.selectFirst("div.arti");
                     //자식태그 <p> or <div>
@@ -102,7 +101,6 @@ public class ArticleController {
                         }
                     }
 
-
                     Article article = new Article();
 
                     article.setTitle(title);
@@ -117,16 +115,12 @@ public class ArticleController {
                     article.setHashtag(searchWord);
 
                     articleRepository.save(article);
-
-//                    articles.add(article); // Add the scraped article to the list
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-//        model.addAttribute("articles", articles);
-        return "article-list"; // Thymeleaf template name for rendering the article list
+        return "article-list";
     }
 
     /*

@@ -1,4 +1,4 @@
-package medicalboard.backend.dataController;
+package medicalboard.backend.controller;
 
 import medicalboard.backend.DTO.StatDetailDTO;
 import medicalboard.backend.datamodel.Article;
@@ -8,6 +8,7 @@ import medicalboard.backend.repository.ArticleRepository;
 import medicalboard.backend.repository.StatisticsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,8 +26,8 @@ public class StatDetailController {
 
 
 
-    @GetMapping("/api/stat/detail")
-    public StatDetailDTO getDetail(@RequestParam("id") Integer id){
+    @GetMapping("/api/stat/detail/{id}")
+    public StatDetailDTO getDetail(@PathVariable Integer id){
 
         //id에 따른 Statistics 가져오기
         // id = front에서 전달
