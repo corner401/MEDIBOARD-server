@@ -33,10 +33,10 @@ public class RankService {
             statsCountMap.put(stat, statsCountMap.getOrDefault(stat, 0)+1);
         }
 
-        return statsCountMap.entrySet().stream()
-                .sorted(Map.Entry.<Statistics, Integer>comparingByValue().reversed())
+        return statsCountMap.entrySet().stream() //statsCountMap의 엔트리들을 스트림으로 변환하여 연속적인 작업을 수행할
+                .sorted(Map.Entry.<Statistics, Integer>comparingByValue().reversed()) //value 값(출현 횟수)을 기준으로 역순으로 정렬
                 .limit(3)
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+                .map(Map.Entry::getKey) //Statistics 객체만을 리스트로 매핑
+                .collect(Collectors.toList()); //리스트로 반환
     }
 }

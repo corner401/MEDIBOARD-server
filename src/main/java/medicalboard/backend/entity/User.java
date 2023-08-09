@@ -26,6 +26,7 @@ public class User extends BaseTimeEntity {
     private String email;
     @Column
     private String password;
+    //외래키
     @Column(nullable = true)
     private String dashboard;
     @Column

@@ -22,7 +22,6 @@ public interface StatisticsRepository extends JpaRepository<Statistics, Integer>
     @Query("SELECT s FROM Statistics s WHERE s.tableName LIKE %:keyword% OR s.summary LIKE %:keyword% OR s.title LIKE %:keyword%")
     List<Statistics> findByKeyword(@Param("keyword") String keyword);
 
-    @Query("SELECT s.id AS id FROM Statistics s")
     Optional<Statistics> findById(Integer id);
 
 }
