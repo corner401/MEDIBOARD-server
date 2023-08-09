@@ -1,7 +1,7 @@
 package medicalboard.backend.controller;
 
 import medicalboard.backend.DTO.StatDetailDTO;
-import medicalboard.backend.datamodel.Article;
+import medicalboard.backend.entity.Article;
 import medicalboard.backend.entity.Statistics;
 import medicalboard.backend.mapper.ArticleMapper;
 import medicalboard.backend.repository.ArticleRepository;
