@@ -30,7 +30,7 @@ public class StarService {
     StatisticsRepository statisticsRepository;
 
     public void addStar(StarDTO star) {
-        User user = userService.getUser(star.getUserId()).get();
+        User user = star.getUserId();
         star.setJob(user.getJob());
         // Star 테이블에 추가
         starRepository.save(StarMapper.dtoToEntity(star));

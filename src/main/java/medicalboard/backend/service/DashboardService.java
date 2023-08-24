@@ -33,8 +33,11 @@ public class DashboardService {
 
     public void addStar(StarDTO starDTO) {
 
-        User user = userService.getUser(starDTO.getUserId()).get();  // 즐겨찾기 주인 사용자
-        Statistics stat = statisticsRepository.getById(starDTO.getStatId());  // 즐겨찾기한 통계자료
+//        User user = userService.getUser(starDTO.getUserId()).get();  // 즐겨찾기 주인 사용자
+//        Statistics stat = statisticsRepository.getById(starDTO.getStatId());  // 즐겨찾기한 통계자료
+
+        User user = starDTO.getUserId();  // 즐겨찾기 주인 사용자
+        Statistics stat = starDTO.getStatId();  // 즐겨찾기한 통계자료
 
         // 대시보드 1개, 즐겨찾기 9개 미만이라고 상정한 코드
         Dashboard dashboard = dashboardRepository.findByUserId(user.getId());

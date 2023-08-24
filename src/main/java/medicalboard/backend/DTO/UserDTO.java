@@ -4,6 +4,7 @@ import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import medicalboard.backend.entity.Dashboard;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.thymeleaf.util.StringUtils;
 
@@ -18,7 +19,7 @@ public class UserDTO {
     @Nullable
     private String password;
     @Nullable
-    private String dashboard;
+    private Dashboard dashboard;
     @Nullable
     private String job;
 

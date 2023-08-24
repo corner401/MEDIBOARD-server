@@ -28,7 +28,7 @@ public class RankService {
         Map<Statistics, Integer> statsCountMap = new HashMap<>();
 
         for(Star star : stars){
-            Integer statId = star.getStatId();
+            Integer statId = star.getStatId().getId();
             Statistics stat = statisticsRepository.getById(statId);
             statsCountMap.put(stat, statsCountMap.getOrDefault(stat, 0)+1);
         }

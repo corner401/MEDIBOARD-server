@@ -26,9 +26,14 @@ public class User extends BaseTimeEntity {
     private String email;
     @Column
     private String password;
-    //외래키
-    @Column(nullable = true)
-    private String dashboard;
+
+    //외래키 추가 리스트로 나타내야함!!!
+    @ManyToOne
+    @JoinColumn(nullable = true)
+    private Dashboard dashboard;
+
+//    @Column(nullable = true)
+//    private String dashboard;
     @Column
     private String job;
 }
