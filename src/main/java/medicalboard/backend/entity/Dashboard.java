@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Builder
 @Table(name = "dashboard")
 @Getter
 @Setter
@@ -18,8 +17,9 @@ public class Dashboard extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "user_id")
-    private Integer userId;
+    @ManyToOne
+    @JoinColumn
+    private User user;
     @Column(name = "dash_page")
     private Integer dashPage;
 
@@ -28,9 +28,9 @@ public class Dashboard extends BaseTimeEntity{
     private List<String> statList  = new ArrayList<>();
 
 
-    public Dashboard(Integer userId, int dash_page) {
+    public Dashboard(User user, int dash_page) {
         super();
-        this.userId = userId;
+        this.user = user;
         this.dashPage = dash_page;
     }
 

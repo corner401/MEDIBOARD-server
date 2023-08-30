@@ -32,7 +32,7 @@ public class User extends BaseTimeEntity {
     @JoinColumn(nullable = true)
     private Dashboard dashboard;
 
-//    @Column(nullable = true)
+    //    @Column(nullable = true)
 //    private String dashboard;
     @Column
     private String job;
