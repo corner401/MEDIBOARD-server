@@ -26,7 +26,7 @@ public class Article {
     private Date updateDate;
     private String link;
     private String hashtag;
-    private String newspaper;
+    private String newspaper; //뉴스사
 
 
 }

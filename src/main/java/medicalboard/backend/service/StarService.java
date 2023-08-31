@@ -7,13 +7,11 @@ import medicalboard.backend.mapper.StarMapper;
 import medicalboard.backend.entity.Statistics;
 import medicalboard.backend.repository.StarRepository;
 import medicalboard.backend.repository.StatisticsRepository;
+import medicalboard.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -25,15 +23,27 @@ public class StarService {
     @Autowired
     private StarRepository starRepository;
     @Autowired
-    StatisticsService statisticsService;
+    private StatisticsService statisticsService;
     @Autowired
-    StatisticsRepository statisticsRepository;
+    private StatisticsRepository statisticsRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private StarMapper starMapper;
 
-    public void addStar(StarDTO star) {
-        User user = userService.getUser(star.getUserId()).get();
-        star.setJob(user.getJob());
+    public void addStar(StarDTO starDTO) {
+        Integer userId = starDTO.getUserId();
+        Optional<User> userOpt = userRepository.findById(userId);
+        if(userOpt.isPresent()){
+            User user = userOpt.get();
+            starDTO.setJob(user.getJob());
+            starDTO.setUserId(user.getId());
+            starDTO.setStatId(starDTO.getStatId());
+
+
+        }
         // Star 테이블에 추가
-        starRepository.save(StarMapper.dtoToEntity(star));
+        starRepository.save(starMapper.dtoToEntity(starDTO));
     }
 
     public List<Statistics> getTop3(String job) {

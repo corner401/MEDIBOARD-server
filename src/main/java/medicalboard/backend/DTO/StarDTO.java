@@ -4,9 +4,6 @@ import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.thymeleaf.util.StringUtils;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,4 +17,6 @@ public class StarDTO {
     @Nullable
     private String job;
 
+
 }
+
