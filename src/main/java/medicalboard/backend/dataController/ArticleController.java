@@ -1,8 +1,6 @@
 package medicalboard.backend.dataController;
 import medicalboard.backend.DTO.ArticleDTO;
 import medicalboard.backend.entity.Article;
-import medicalboard.backend.entity.PageInfo;
-import medicalboard.backend.mapper.ArticleMapper;
 import medicalboard.backend.repository.ArticleRepository;
 import medicalboard.backend.service.ArticleService;
 import org.checkerframework.checker.index.qual.Positive;
