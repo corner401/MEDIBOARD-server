@@ -22,7 +22,7 @@ public class Star extends BaseTimeEntity {
     private User userId;
 
     //    statid 외래키 추가
-    @OneToOne
+    @OneToOne //ManyToMany로 변경!
     @JoinColumn(name = "stat_id")
     private Statistics statId;
 

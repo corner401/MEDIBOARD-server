@@ -1,7 +1,15 @@
 package medicalboard.backend.dataController;
+import medicalboard.backend.DTO.ArticleDTO;
 import medicalboard.backend.entity.Article;
+import medicalboard.backend.entity.PageInfo;
+import medicalboard.backend.mapper.ArticleMapper;
 import medicalboard.backend.repository.ArticleRepository;
+import medicalboard.backend.service.ArticleService;
+import org.checkerframework.checker.index.qual.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -10,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -22,6 +32,9 @@ public class ArticleController {
 
     @Autowired
     private ArticleRepository articleRepository;
+
+    @Autowired
+    private ArticleService articleService;
 
     /*
     뉴스 기사 크롤링
@@ -127,13 +140,32 @@ public class ArticleController {
     뉴스기사 검색
      */
     @GetMapping("/api/news/list")
-    public List<Article> getArticles(@RequestParam(name = "keyword", required = false) String keyword){
+    public Page<ArticleDTO> getArticles(@RequestParam(name = "keyword", required = false) String keyword,
+                                     @Positive @RequestParam(name = "page", defaultValue = "1") int page,
+                                     @Positive @RequestParam Integer size,
+                                     Pageable pageable) {
+            Page<Article> articles = articleService.searchArticlesByKeyword(keyword, pageable, page, size);
+            // articles를 ArticleDTO로 변환하는 로직 필요 (예: 사용할 Mapper를 활용)
+            // 예를 들어, `Page.map` 함수를 사용하여 각 Article을 ArticleDTO로 변환할 수 있습니다.
+            List<Article> articleList = articles.getContent();
 
-        if(keyword == null){
-            return articleRepository.findAll();
-        }
-        else{
-            return articleRepository.findByKeyword(keyword);
-        }
+            // 리스트를 DTO로 변환
+            List<ArticleDTO> dtoList = articleList.stream()
+                    .map(article -> new ArticleDTO(
+                            article.getId(),
+                            article.getTitle(),
+                            article.getWriter(),
+                            article.getContent(),
+                            article.getLink(),
+                            article.getHashtag(),
+                            article.getNewspaper()
+                    ))
+                    .collect(Collectors.toList());
+
+            // 새로운 Page 객체 생성
+            Page<ArticleDTO> dtoPage = new PageImpl<>(dtoList, articles.getPageable(), articles.getTotalElements());
+
+            return dtoPage;
+
     }
 }
