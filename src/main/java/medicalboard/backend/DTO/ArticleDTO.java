@@ -1,6 +1,7 @@
 package medicalboard.backend.DTO;
 
 
+import jakarta.persistence.Column;
 import lombok.*;
 
 @Data
