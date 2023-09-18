@@ -19,6 +19,7 @@ public class Article {
     private Integer id;
     private String title;
     private String writer;
+    @Column(columnDefinition = "LONGTEXT")
     private String content;
     @Column(name = "create_date")
     private Date createDate;
