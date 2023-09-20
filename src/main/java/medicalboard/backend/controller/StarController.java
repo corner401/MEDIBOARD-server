@@ -27,6 +27,8 @@ public class StarController {
     @PostMapping("/api/stat/star")
     public ResponseEntity<Object> addStar(@RequestBody StarDTO starDTO) {
 
+        //중복체크하기
+
         starService.addStar(starDTO);
         dashboardService.addStar(starDTO);
 

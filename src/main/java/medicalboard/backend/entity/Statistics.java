@@ -16,13 +16,13 @@ public class Statistics {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
+    @Column(columnDefinition = "LONGTEXT")
     private String token;
     @Column
     private String src;
-    @Column(name = "embeded_url")
+    @Column(name = "embeded_url", columnDefinition = "LONGTEXT")
     private String embededUrl;
-    @Column(name = "report_id")
+    @Column(name = "report_id", columnDefinition = "LONGTEXT")
     private String reportId;
     @Column(name = "create_date")
     private Date createDate;

@@ -1,7 +1,14 @@
 package medicalboard.backend.dataController;
+import medicalboard.backend.DTO.ArticleDTO;
 import medicalboard.backend.entity.Article;
 import medicalboard.backend.repository.ArticleRepository;
+import medicalboard.backend.service.ArticleService;
+import org.checkerframework.checker.index.qual.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -10,6 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -23,6 +32,9 @@ public class ArticleController {
     @Autowired
     private ArticleRepository articleRepository;
 
+    @Autowired
+    private ArticleService articleService;
+
     /*
     뉴스 기사 크롤링
      */
@@ -33,7 +45,7 @@ public class ArticleController {
         int id = 0;
         try {
             //searchWord로 url연결
-            String url = "https://www.dailymedi.com/news/search.php?sch_sca=22&sch_sca2=2202&sch_scope=wr_subject&sch_scope2=basic&sch_scope3=&sdate=&edate=&sfl=&stx=" + searchWord;
+            String url = "https://www.dailymedi.com/news/search.php?sch_sca=&sch_sca2=&sch_scope=&sch_scope2=&sch_scope3=&sdate=&edate=&stx=" + searchWord;
             Document doc = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0")
                     .get();
@@ -127,13 +139,36 @@ public class ArticleController {
     뉴스기사 검색
      */
     @GetMapping("/api/news/list")
-    public List<Article> getArticles(@RequestParam(name = "keyword", required = false) String keyword){
+    //페이지 1번부터
+    public Page<ArticleDTO> getArticles(@RequestParam(name = "keyword", required = false) String keyword,
+                                     @Positive @RequestParam(name = "page", defaultValue = "1") int page,
+                                     @Positive @RequestParam Integer size,
+                                     Pageable pageable) {
 
-        if(keyword == null){
-            return articleRepository.findAll();
-        }
-        else{
-            return articleRepository.findByKeyword(keyword);
-        }
+            page = page - 1;  // 1을 빼서 0부터 시작하도록 조정
+            PageRequest pageRequest = PageRequest.of(page, size); //Pageable의 구현체 이면서, 새로운 PageRequest 객체를 생성하며, page와 size 매개변수로 페이지 번호와 페이지 크기를 설정
+            Page<Article> articles = articleService.searchArticlesByKeyword(keyword, pageRequest, page, size);
+            // articles를 ArticleDTO로 변환하는 로직 필요 (예: 사용할 Mapper를 활용)
+            // 예를 들어, `Page.map` 함수를 사용하여 각 Article을 ArticleDTO로 변환할 수 있습니다.
+            List<Article> articleList = articles.getContent();
+
+            // 리스트를 DTO로 변환
+            List<ArticleDTO> dtoList = articleList.stream()
+                    .map(article -> new ArticleDTO(
+                            article.getId(),
+                            article.getTitle(),
+                            article.getWriter(),
+                            article.getContent(),
+                            article.getLink(),
+                            article.getHashtag(),
+                            article.getNewspaper()
+                    ))
+                    .collect(Collectors.toList());
+
+            // 새로운 Page 객체 생성
+            Page<ArticleDTO> dtoPage = new PageImpl<>(dtoList, articles.getPageable(), articles.getTotalElements());
+
+            return dtoPage;
+
     }
 }
