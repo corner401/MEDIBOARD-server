@@ -124,7 +124,18 @@ public class ArticleController {
                     article.setNewspaper("데일리 메디");
                     if(searchWord.equals("요양"))
                         searchWord = "요양기관";
+                    else if(searchWord.equals("환자"))
+                        searchWord = "환자표본";
+                    else if(searchWord.equals("병원"))
+                        searchWord = "병원평가";
+                    else if(searchWord.equals("위치"))
+                        searchWord = "위치정보";
+                    else if(searchWord.equals("지역"))
+                        searchWord = "지역별";
+                    else if(searchWord.equals("기간"))
+                        searchWord = "기간별";
                     article.setHashtag(searchWord);
+
 
                     articleRepository.save(article);
                 }

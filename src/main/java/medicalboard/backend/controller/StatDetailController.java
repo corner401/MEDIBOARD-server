@@ -4,6 +4,7 @@ import medicalboard.backend.DTO.StatDetailDTO;
 import medicalboard.backend.entity.Article;
 import medicalboard.backend.entity.Statistics;
 import medicalboard.backend.mapper.ArticleMapper;
+import medicalboard.backend.mapper.ArticleProjection;
 import medicalboard.backend.repository.ArticleRepository;
 import medicalboard.backend.repository.StatisticsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,9 @@ import java.util.Optional;
 @RestController
 public class StatDetailController {
     @Autowired
-    StatisticsRepository statisticsRepository;
+    private StatisticsRepository statisticsRepository;
     @Autowired
-    ArticleRepository articleRepository;
+    private ArticleRepository articleRepository;
 
 
 
@@ -36,12 +37,12 @@ public class StatDetailController {
         //Statistics의 hashtags
         List<String> hashtags = statistic.map(s -> List.of(s.getHashtag().split(","))).orElse(Collections.emptyList());
         //모든 기사의 hashtags
-        List<ArticleMapper> articleMapping = articleRepository.findHashtag();
+        List<ArticleProjection> articleMapping = articleRepository.findHashtag();
 
         //Article List
         List<Article> article = new ArrayList<>();
         for( String text : hashtags ){ //통계 hashtags
-            for(ArticleMapper mapping : articleMapping) //기사 hashtag
+            for(ArticleProjection mapping : articleMapping) //기사 hashtag
                 if(text.equals(mapping.getHashtag())){
                 Article emptyArticle = new Article();
                 Article getArti = articleRepository.findById(mapping.getId()).orElse(emptyArticle);
