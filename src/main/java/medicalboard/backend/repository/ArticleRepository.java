@@ -3,6 +3,7 @@ package medicalboard.backend.repository;
 import lombok.NonNull;
 import medicalboard.backend.mapper.ArticleMapper;
 import medicalboard.backend.entity.Article;
+import medicalboard.backend.mapper.ArticleProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,7 +19,7 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
     Page<Article> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
 
     @Query("SELECT a.id AS id, a.hashtag AS hashtag FROM Article a")
-    List<ArticleMapper> findHashtag();
+    List<ArticleProjection> findHashtag();
     Optional<Article> findById(@NonNull Integer id);
 
     //전체뉴스 리스트 pagenation
